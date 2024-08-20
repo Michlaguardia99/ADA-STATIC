@@ -1,0 +1,120 @@
+/* ADJUST IF NEED AND JSUT INSERT TO CSS */
+
+.controls-container {
+    position: fixed;
+    right: 30px;
+    top: 80px;
+    /* Adjust based on your layout */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+/* Styling for the toggle button */
+#toggleControlsButton {
+    border: none;
+    background: rgb(5, 12, 156);
+    background: radial-gradient(circle, rgba(5, 12, 156, 1) 69%, rgba(58, 190, 249, 1) 100%);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    width: 55px;
+    height: 55px;
+    /* margin-bottom: 10px; */
+    /* Space between toggle button and control buttons */
+    display: flex;
+    /* Use flexbox for centering */
+    align-items: center;
+    /* Center items vertically */
+    justify-content: center;
+    /* Center items horizontally */
+}
+
+#toggleControlsButton:hover {
+    background: rgb(5, 12, 156);
+    background: radial-gradient(circle, rgba(5, 12, 156, 1) 69%, rgba(58, 190, 249, 1) 100%);
+}
+
+#toggleControlsButton:active {
+    transform: scale(0.95);
+}
+
+/* Controls section styling */
+.controls {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    opacity: 0;
+    /* Hide controls initially */
+    transition: opacity 0.5s ease;
+    visibility: hidden;
+    /* Hide controls initially */
+    margin-top: 10px;
+    /* Space between toggle button and control buttons */
+}
+
+.controls.show {
+    opacity: 1;
+    /* Show controls */
+    visibility: visible;
+    /* Make controls visible */
+}
+
+/* Animation for individual buttons */
+.controls button {
+    border: none;
+    background: rgb(5, 12, 156);
+    background: radial-gradient(circle, rgba(5, 12, 156, 1) 69%, rgba(58, 190, 249, 1) 100%);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    width: 50px;
+    height: 50px;
+    margin-top: 10px;
+    transform: translateY(20px);
+    /* Start below its final position */
+    opacity: 0;
+    /* Start hidden */
+    display: flex;
+    /* Use flexbox for centering */
+    align-items: center;
+    /* Center items vertically */
+    justify-content: center;
+    /* Center items horizontally */
+}
+
+.controls button.show {
+    animation: slideIn 0.5s ease forwards;
+    /* Animate the sliding effect */
+
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.reset {
+    background-color: #dc3545;
+    /* Red color for reset button */
+}
+
+.reset:hover {
+    background-color: #c82333;
+}
+
+/* Style for images inside buttons */
+.controls button img,
+#toggleControlsButton img {
+    width: 40px;
+    /* Adjust size as needed */
+    height: 40px;
+    /* Adjust size as needed */
+}

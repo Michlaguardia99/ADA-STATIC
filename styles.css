@@ -1,120 +1,174 @@
-/* ADJUST IF NEED AND JSUT INSERT TO CSS */
+/* ADJUST IF NEED AND JUST INSERT TO CSS */
 
-.controls-container {
-    position: fixed;
-    right: 30px;
-    top: 80px;
-    /* Adjust based on your layout */
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-}
-
-/* Styling for the toggle button */
-#toggleControlsButton {
-    border: none;
-    background: rgb(5, 12, 156);
-    background: radial-gradient(circle, rgba(5, 12, 156, 1) 69%, rgba(58, 190, 249, 1) 100%);
-    border-radius: 50%;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s;
-    width: 55px;
-    height: 55px;
-    /* margin-bottom: 10px; */
-    /* Space between toggle button and control buttons */
-    display: flex;
-    /* Use flexbox for centering */
-    align-items: center;
-    /* Center items vertically */
-    justify-content: center;
-    /* Center items horizontally */
-}
-
-#toggleControlsButton:hover {
-    background: rgb(5, 12, 156);
-    background: radial-gradient(circle, rgba(5, 12, 156, 1) 69%, rgba(58, 190, 249, 1) 100%);
-}
-
-#toggleControlsButton:active {
-    transform: scale(0.95);
-}
-
-/* Controls section styling */
-.controls {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    opacity: 0;
-    /* Hide controls initially */
-    transition: opacity 0.5s ease;
-    visibility: hidden;
-    /* Hide controls initially */
-    margin-top: 10px;
-    /* Space between toggle button and control buttons */
-}
-
-.controls.show {
-    opacity: 1;
-    /* Show controls */
-    visibility: visible;
-    /* Make controls visible */
-}
-
-/* Animation for individual buttons */
 .controls button {
-    border: none;
-    background: rgb(5, 12, 156);
-    background: radial-gradient(circle, rgba(5, 12, 156, 1) 69%, rgba(58, 190, 249, 1) 100%);
-    border-radius: 50%;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s;
-    width: 50px;
-    height: 50px;
-    margin-top: 10px;
-    transform: translateY(20px);
-    /* Start below its final position */
-    opacity: 0;
-    /* Start hidden */
-    display: flex;
-    /* Use flexbox for centering */
-    align-items: center;
-    /* Center items vertically */
-    justify-content: center;
-    /* Center items horizontally */
+  position: relative;
+  border: none;
+  background: radial-gradient(circle, rgba(5, 12, 156, 1) 69%, rgba(58, 190, 249, 1) 100%);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible; /* Allow text to overflow outside the button */
 }
 
-.controls button.show {
-    animation: slideIn 0.5s ease forwards;
-    /* Animate the sliding effect */
-
+/* Change button background on hover */
+.controls button:hover {
+  background-color: rgba(5, 12, 156, 0.8); /* Slightly darker background on hover */
 }
 
-@keyframes slideIn {
-    from {
-        transform: translateY(20px);
-        opacity: 0;
-    }
-
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
+/* Style for the image */
+.controls button img {
+  width: 32px;
+  height: 32px;
 }
 
+/* Text styling */
+.button-text {
+  position: absolute;
+  top: 50%;
+  left: 90%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 18px; /* Adjust font size as needed */
+  white-space: nowrap; /* Prevent text from wrapping */
+  opacity: 0;
+  transition: transform 0.3s, opacity 0.3s;
+  z-index: 10; /* Ensure text is on top of other elements */
+  font-weight: 700;
+  text-shadow: #000;
+  background: rgba(5, 12, 156, 0.8);
+  border-radius: 10px;
+  padding:5px;
+}
+
+/* Hover effect for sliding text */
+.controls button:hover .button-text {
+  transform: translate(-150%, -50%); /* Slide text further out to the left */
+  opacity: 1; /* Ensure text is visible on hover */
+}
+
+/* Optional: Adjust specific button styles */
 .reset {
-    background-color: #dc3545;
-    /* Red color for reset button */
+  background-color: #dc3545;
+  /* Red color for reset button */
 }
 
 .reset:hover {
-    background-color: #c82333;
+  background-color: #c82333;
 }
 
-/* Style for images inside buttons */
+
+.controls-container {
+  position: fixed;
+  right: 20px;
+  top: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  z-index: 1000; /* Ensure controls are above other content */
+}
+
+#toggleControlsButton {
+  border: none;
+  background: radial-gradient(circle, rgba(5, 12, 156, 1) 69%, rgba(58, 190, 249, 1) 100%);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+  width: 55px;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#toggleControlsButton:hover {
+  background: radial-gradient(circle, rgba(5, 12, 156, 1) 69%, rgba(58, 190, 249, 1) 100%);
+}
+
+#toggleControlsButton:active {
+  transform: scale(0.95);
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  visibility: hidden;
+  margin-top: 10px;
+}
+
+.controls.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.controls button {
+  border: none;
+  background: radial-gradient(circle, rgba(5, 12, 156, 1) 69%, rgba(58, 190, 249, 1) 100%);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+  width: 50px;
+  height: 50px;
+  margin-top: 10px;
+  transform: translateY(20px);
+  opacity: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.controls button.show {
+  animation: slideIn 0.5s ease forwards;
+}
+
+@keyframes slideIn {
+  from {
+      transform: translateY(20px);
+      opacity: 0;
+  }
+  to {
+      transform: translateY(0);
+      opacity: 1;
+  }
+}
+
+.reset {
+  background-color: #dc3545;
+}
+
+.reset:hover {
+  background-color: #c82333;
+}
+
 .controls button img,
 #toggleControlsButton img {
+  width: 36px;
+  height: 36px;
+}
+
+button:focus {
+  outline: 2px solid #000; /* High-contrast outline for better visibility */
+}
+
+@media (max-width: 600px) {
+  .controls-container {
+    right: 10px;
+  }
+
+  #toggleControlsButton {
+    width: 45px;
+    height: 45px;
+  }
+
+  .controls button {
     width: 40px;
-    /* Adjust size as needed */
     height: 40px;
-    /* Adjust size as needed */
+  }
 }

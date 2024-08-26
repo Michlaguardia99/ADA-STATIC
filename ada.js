@@ -1,6 +1,4 @@
-// ADJUST IF NEEDED
-
-let textSize = 1; // 1 is the default size
+let textSize = 1;
 let isGrayscale = false;
 let isHighContrast = false;
 let isNegativeContrast = false;
@@ -9,13 +7,17 @@ let isUnderlinedLinks = false;
 let isReadableFont = false;
 
 function changeTextSize(action) {
-    const body = document.body;
+    const elements = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'li', 'a', 'p', 'span'];
     if (action === 'increase') {
-        textSize += 0.1;
+        textSize = Math.min(textSize + 0.1, 3); // Max size 3em
     } else if (action === 'decrease') {
-        textSize = Math.max(1, textSize - 0.1); // Ensure text size doesn't go below 1
+        textSize = Math.max(1, textSize - 0.1);
     }
-    body.style.fontSize = `${textSize}em`;
+    elements.forEach(selector => {
+        document.querySelectorAll(selector).forEach(element => {
+            element.style.fontSize = `${textSize}em`;
+        });
+    });
 }
 
 function toggleGrayscale() {
@@ -27,8 +29,8 @@ function toggleGrayscale() {
 function toggleHighContrast() {
     const body = document.body;
     isHighContrast = !isHighContrast;
-    body.style.backgroundColor = isHighContrast ? '#000' : '#fff';
-    body.style.color = isHighContrast ? '#fff' : '#000';
+    body.style.backgroundColor = isHighContrast ? '#000' : '';
+    body.style.color = isHighContrast ? '#fff' : '';
 }
 
 function toggleNegativeContrast() {
@@ -40,7 +42,7 @@ function toggleNegativeContrast() {
 function toggleLightBackground() {
     const body = document.body;
     isLightBackground = !isLightBackground;
-    body.style.backgroundColor = isLightBackground ? '#f0f0f0' : '#ffffff';
+    body.style.backgroundColor = isLightBackground ? '#f0f0f0' : '';
 }
 
 function toggleLinksUnderline() {
@@ -59,14 +61,27 @@ function toggleReadableFont() {
 
 function resetSettings() {
     const body = document.body;
-    body.style.fontSize = '';
+
+    // Reset font size for specific elements
+    const elements = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'li', 'a', 'p', 'span'];
+    elements.forEach(selector => {
+        document.querySelectorAll(selector).forEach(element => {
+            element.style.fontSize = ''; // Reset font size
+        });
+    });
+
+    // Reset other styles
     body.style.filter = '';
     body.style.backgroundColor = '';
     body.style.color = '';
     body.style.fontFamily = '';
+
+    // Reset link styles
     document.querySelectorAll('a').forEach(link => {
-        link.style.textDecoration = '';
+        link.style.textDecoration = ''; // Reset text decoration
     });
+
+    // Reset control states
     textSize = 1;
     isGrayscale = false;
     isHighContrast = false;
@@ -74,6 +89,15 @@ function resetSettings() {
     isLightBackground = false;
     isUnderlinedLinks = false;
     isReadableFont = false;
+
+    // Remove the 'show' class from controls
+    const controls = document.getElementById('controlsDiv');
+    controls.classList.remove('show');
+
+    // Reset the 'show' class on each button
+    Array.from(controls.children).forEach(button => {
+        button.classList.remove('show');
+    });
 }
 
 function toggleControls() {
@@ -82,19 +106,15 @@ function toggleControls() {
     
     if (controls.classList.contains('show')) {
         controls.classList.remove('show');
-        // toggleButton.textContent = 'Show Controls';
-        // Remove 'show' class from all buttons
         Array.from(controls.children).forEach(button => {
             button.classList.remove('show');
         });
     } else {
         controls.classList.add('show');
-        // toggleButton.textContent = 'Hide Controls';
-        // Add 'show' class to all buttons with a slight delay
         Array.from(controls.children).forEach((button, index) => {
             setTimeout(() => {
                 button.classList.add('show');
-            }, index * 100); // Stagger the animations by 100ms for each button
+            }, index * 100);
         });
     }
 }
